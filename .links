@@ -1,0 +1,4 @@
+Android SDK Command-Line Tools: https://developer.android.com/tools#tools-sdk
+Download via wget: wget https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+SDK manager: https://developer.android.com/tools/sdkmanager
+
