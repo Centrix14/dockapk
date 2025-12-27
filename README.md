@@ -21,16 +21,17 @@ To build image use command like this:
 sudo docker build --network=host -t dockapk:8 .
 ```
 
-To run container you will need proper network setup (i just used host-machine network) and `--mount` flag configuration. Typical run command will be follows:
+To create container you will need proper network setup (i just used host-machine network) and `--mount` flag configuration. Typical run command will be follows:
 
 ``` shell
-docker run \
-       --net=host \
+docker create \
+       --name dockapk8 \
+       --network host \
        --mount type=volume,source=dockapk-output,destination=/dockapk-output \
        dockapk:8
 ```
 
-This command can be found in `run.sh` file.
+This command also can be found in `create.sh` file.
 
 Builded APK will be exported to volume automatically when container finish work.
 
@@ -47,7 +48,7 @@ Running container starts `entrypoint.sh`:
 cd $APP_PATH
 ./gradlew --no-daemon assembleDebug
 cp /app/build/outputs/apk/debug/juloo.keyboard2.debug.apk \
-   /dockapk-output/unexpected-keyboard.apk
+   /dockapk-output/unexpected-keyboard-`date +%s`.apk
 ```
 
 # Reconfigurating
