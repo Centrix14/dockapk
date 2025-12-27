@@ -11,7 +11,7 @@ RUN unzip cmdline-tools.zip
 RUN wget -cO app.zip https://github.com/Julow/Unexpected-Keyboard/archive/refs/tags/1.32.1.zip
 RUN unzip app.zip
 
-FROM gradle:9.2.1-jdk17 AS builder
+FROM eclipse-temurin:17 AS builder
 
 VOLUME /dockapk-output
 COPY --from=downloader /Unexpected-Keyboard-1.32.1 /app
