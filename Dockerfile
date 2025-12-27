@@ -1,7 +1,7 @@
 FROM alpine:3 AS downloader
 
 LABEL name="dockapk"
-LABEL version=6
+LABEL version=8
 LABEL description="Simple Docker image for building APK files; created as educational task"
 
 WORKDIR /
@@ -28,5 +28,6 @@ RUN yes | ./sdkmanager --licenses
 RUN ./sdkmanager --install "build-tools;34.0.0" \
                            "platform-tools" \
                            "platforms;android-35"
+RUN $APP_PATH/gradlew --version --no-daemon
 
 ENTRYPOINT ["/entrypoint.sh"]
