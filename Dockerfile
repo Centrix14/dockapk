@@ -1,7 +1,7 @@
 FROM alpine:3 AS downloader
 
 LABEL name="dockapk"
-LABEL version=5
+LABEL version=6
 LABEL description="Simple Docker image for building APK files; created as educational task"
 
 WORKDIR /
