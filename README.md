@@ -49,3 +49,9 @@ cd $APP_PATH
 cp /app/build/outputs/apk/debug/juloo.keyboard2.debug.apk \
    /dockapk-output/unexpected-keyboard.apk
 ```
+
+# Reconfigurating
+When use this dockerfile in your own purpose don't forget to check:
+- application sources link (line 11),
+- JDK version (line 14),
+- Android SDK versions (line 28).
