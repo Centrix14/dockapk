@@ -25,8 +25,8 @@ ENV APP_PATH=/app
 WORKDIR /android/cmdline-tools/latest/bin
 
 RUN yes | ./sdkmanager --licenses
-RUN ./sdkmanager --install "build-tools;30.0.0" \
+RUN ./sdkmanager --install "build-tools;34.0.0" \
                            "platform-tools" \
-                           "platforms;android-11"
+                           "platforms;android-35"
 
 ENTRYPOINT ["/entrypoint.sh"]
