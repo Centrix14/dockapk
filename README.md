@@ -4,7 +4,7 @@ dockapk is a sample docker image for building Android apk files. It can be used 
 # Prerequisites
 dockapk is tested with `Docker version 29.0.4, build 3247a5a`. Application used for testing is an [Unexpected Keyboard](https://github.com/Julow/Unexpected-Keyboard).
 
-dockapk requires proper internet connection for building (downloading of Andoid SDK and application sources) and running (automatic Gradle installation and ). Internet usage in run-time can be eliminated with proper Gradle installation in build-time.
+dockapk requires proper internet connection for building (downloading Andoid SDK, Gradle and application sources) and running (don't know exact reason; guess for key generating).
 
 Image uses volume `/dockapk-output` for exporting data. You can create corresponding volume with something like this:
 
@@ -18,7 +18,7 @@ Output files will be stored in Docker volumes directory. On my machine is a `/va
 To build image use command like this:
 
 ``` shell
-sudo docker build --network=host -t dockapk:5 .
+sudo docker build --network=host -t dockapk:8 .
 ```
 
 To run container you will need proper network setup (i just used host-machine network) and `--mount` flag configuration. Typical run command will be follows:
@@ -27,7 +27,7 @@ To run container you will need proper network setup (i just used host-machine ne
 docker run \
        --net=host \
        --mount type=volume,source=dockapk-output,destination=/dockapk-output \
-       dockapk:5
+       dockapk:8
 ```
 
 This command can be found in `run.sh` file.
@@ -39,9 +39,7 @@ dockapk building is comprising of two stages: download stage and build stage.
 
 `Download` stage using `alpine:3` base layer and wget for downloading file.
 
-`Build` stage using `gradle:9.2.1-jdk17` base layer. Gradle itself is not required (since it automatically installs via `gradlew`) but this image used as JDK17 provider. For newer apps another JDK revisions can be used.
-
-At building stage image installs: "build-tools;30.0.0", "platform-tools", "platforms;android-11".
+`Build` stage using `eclipse-temurin:17` base layer as JDK provider. At building stage image installs: "build-tools;34.0.0", "platform-tools", "platforms;android-35" (required for Unexpected Keyboard).
 
 Running container starts `entrypoint.sh`:
 
